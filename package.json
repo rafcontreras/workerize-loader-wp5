@@ -1,0 +1,57 @@
+{
+  "name": "@contrerasrafael/workerize-loader",
+  "version": "2.0.0",
+  "description": "Automatically move a module into a Web Worker (Webpack loader)",
+  "keywords": [
+    "webpack",
+    "loader",
+    "worker",
+    "web worker",
+    "thread",
+    "workerize"
+  ],
+  "repository": "git@github.com:rafcontreras/workerize-loader.git",
+  "license": "MIT",
+  "author": "Rafael Contreras <raf@contrer.as> (https://contrer.as)",
+  "main": "dist/index.js",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "microbundle --format cjs --no-compress --inline none src/*.js",
+    "format": "prettier --write \"./**/*.{js,ts,css,json,md,mdx,html,yml,yaml,pcss,jsx,tsx}\"",
+    "develop": "microbundle watch",
+    "prebuild": "rimraf dist",
+    "prepublishOnly": "yarn build",
+    "lint:package": "sort-package-json",
+    "release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+  },
+  "browserslist": [
+    "IE 10",
+    "node 8"
+  ],
+  "dependencies": {
+    "loader-utils": "2.0.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "7.14.7",
+    "eslint": "7.30.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-promise": "5.1.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "microbundle": "0.13.3",
+    "prettier": "2.3.2",
+    "prettier-plugin-sort-json": "0.0.2",
+    "rimraf": "3.0.2",
+    "sort-package-json": "1.50.0",
+    "webpack": "5.45.1"
+  },
+  "peerDependencies": {
+    "webpack": "5^"
+  },
+  "type": "module"
+}
