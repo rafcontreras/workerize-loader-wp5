@@ -10,7 +10,10 @@
     "thread",
     "workerize"
   ],
-  "repository": "git@github.com:rafcontreras/workerize-loader.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rafcontreras/workerize-loader.git"
+  },
   "license": "MIT",
   "author": "Rafael Contreras <raf@contrer.as> (https://contrer.as)",
   "main": "dist/index.js",
@@ -53,5 +56,12 @@
   "peerDependencies": {
     "webpack": "5^"
   },
-  "type": "module"
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/rafcontreras/workerize-loader/issues"
+  },
+  "homepage": "https://github.com/rafcontreras/workerize-loader#readme",
+  "directories": {
+    "test": "test"
+  }
 }

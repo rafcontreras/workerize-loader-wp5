@@ -1,0 +1,80 @@
+name: Publish Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Use Node.js v14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install latest Yarn
+        run: npm install yarn@latest -g
+        
+      - name: Install npm package dependencies using a lockfile
+        run: yarn install --frozen-lockfile
+
+      - name: Build package
+        run: yarn build
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Use Node.js v14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install latest Yarn
+        run: npm install yarn@latest -g
+        
+      - name: Install npm package dependencies using a lockfile
+        run: yarn install --frozen-lockfile
+
+      - name: Publish package
+        run: yarn publish --new-version ${{ github.event.release.tag_name }} --no-git-tag-version --verbose
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+    name: Publish version ${{ github.event.release.tag_name }} to npm registry
+
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Use Node.js v14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://npm.pkg.github.com/
+
+      - name: Install latest Yarn
+        run: npm install yarn@latest -g
+        
+      - name: Install npm package dependencies using a lockfile
+        run: yarn install --frozen-lockfile
+
+      - name: Publish package
+        run: yarn publish --new-version ${{ github.event.release.tag_name }} --no-git-tag-version --verbose
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    name: Publish version ${{ github.event.release.tag_name }} to GitHub npm registry
