@@ -7,7 +7,7 @@ import WebWorkerTemplatePlugin from "webpack/lib/webworker/WebWorkerTemplatePlug
 export default function loader() {}
 
 const CACHE = {};
-const tapName = "workerize-loader";
+const tapName = "workerize-loader-wp5";
 
 const compilationHook = (compiler, handler) => {
   if (compiler.hooks) {
@@ -57,7 +57,7 @@ loader.pitch = (request) => {
     compilerOptions.output.globalObject === "window"
   ) {
     console.warn(
-      'Warning (workerize-loader): output.globalObject is set to "window". It should be set to "self" or "this" to support HMR in Workers.'
+      'Warning (workerize-loader-wp5): output.globalObject is set to "window". It should be set to "self" or "this" to support HMR in Workers.'
     );
   }
 
@@ -141,7 +141,7 @@ loader.pitch = (request) => {
           }
           compilation.moduleGraph.addExtraReason(
             entryModule,
-            "used by workerize-loader"
+            "used by workerize-loader-wp5"
           );
         }
       });
