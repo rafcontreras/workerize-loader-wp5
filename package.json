@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/rafcontreras/workerize-loader.git"
+    "url": "git+ssh://git@github.com/rafcontreras/workerize-loader-wp5.git"
   },
   "license": "MIT",
   "author": "Rafael Contreras <raf@contrer.as> (https://contrer.as)",
