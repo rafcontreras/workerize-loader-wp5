@@ -26,7 +26,7 @@
     "format": "prettier --write \"./**/*.{js,ts,css,json,md,mdx,html,yml,yaml,pcss,jsx,tsx}\"",
     "develop": "microbundle watch",
     "prebuild": "rimraf dist",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "npm run build",
     "lint:package": "sort-package-json",
     "release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
