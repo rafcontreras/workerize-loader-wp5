@@ -1,6 +1,6 @@
 {
   "name": "@contrerasrafael/workerize-loader",
-  "version": "2.0.0",
+  "version": "1.9.2",
   "description": "Automatically move a module into a Web Worker (Webpack loader)",
   "keywords": [
     "webpack",
