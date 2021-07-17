@@ -1,6 +1,6 @@
 {
   "name": "workerize-loader-wp5",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Automatically move a module into a Web Worker (Webpack loader)",
   "keywords": [
     "webpack",
@@ -56,7 +56,6 @@
   "peerDependencies": {
     "webpack": "5^"
   },
-  "type": "module",
   "bugs": {
     "url": "https://github.com/rafcontreras/workerize-loader/issues"
   },

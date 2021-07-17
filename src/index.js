@@ -32,7 +32,7 @@ const exportDeclarationHook = (parser, handler) => {
   return parser.plugin("export declaration", handler);
 };
 
-loader.pitch = (request) => {
+loader.pitch = function(request) {
   this.cacheable(false);
 
   const options = loaderUtils.getOptions(this) || {};
