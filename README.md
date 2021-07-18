@@ -10,7 +10,7 @@
 ## Install
 
 ```sh
-npm install -D workerize-loader
+npm install -D workerize-loader-wp5
 ```
 
 ### Usage
@@ -30,7 +30,7 @@ export function expensive(time) {
 **index.js**: _(our demo)_
 
 ```js
-import worker from "workerize-loader!./worker";
+import worker from "workerize-loader-wp5!./worker";
 
 let instance = worker(); // `new` is optional
 
@@ -54,7 +54,7 @@ You can also inline the worker as a BLOB with the `inline` parameter
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader',
+  loader: 'workerize-loader-wp5',
   options: { inline: true }
 }
 ```
@@ -62,7 +62,7 @@ You can also inline the worker as a BLOB with the `inline` parameter
 or
 
 ```js
-import worker from "workerize-loader?inline!./worker";
+import worker from "workerize-loader-wp5?inline!./worker";
 ```
 
 #### `name`
@@ -75,7 +75,7 @@ will be injected automatically (`{name}.worker.js`).
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader',
+  loader: 'workerize-loader-wp5',
   options: { name: '[name].[contenthash:8]' }
 }
 ```
@@ -83,7 +83,7 @@ will be injected automatically (`{name}.worker.js`).
 or
 
 ```js
-import worker from "workerize-loader?name=[name].[contenthash:8]!./worker";
+import worker from "workerize-loader-wp5?name=[name].[contenthash:8]!./worker";
 ```
 
 #### `publicPath`
@@ -97,7 +97,7 @@ get their full URL. It can be a path, or a full URL with host.
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader',
+  loader: 'workerize-loader-wp5',
   options: { publicPath: '/static/' }
 }
 ```
@@ -114,7 +114,7 @@ worker being loaded.
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader',
+  loader: 'workerize-loader-wp5',
   options: { ready: true }
 }
 ```
@@ -122,7 +122,7 @@ worker being loaded.
 or
 
 ```js
-import worker from "workerize-loader?ready!./worker";
+import worker from "workerize-loader-wp5?ready!./worker";
 
 let instance = worker(); // `new` is optional
 await instance.ready;
@@ -143,7 +143,7 @@ workaround.
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader',
+  loader: 'workerize-loader-wp5',
   options: { import: true }
 }
 ```
@@ -151,13 +151,13 @@ workaround.
 or
 
 ```js
-import worker from "workerize-loader?import!./worker";
+import worker from "workerize-loader-wp5?import!./worker";
 ```
 
 ### About [Babel](https://babeljs.io/)
 
 If you're using [Babel](https://babeljs.io/) in your build, make sure you
-disabled commonJS transform. Otherwize, workerize-loader won't be able to
+disabled commonJS transform. Otherwize, workerize-loader-wp5 won't be able to
 retrieve the list of exported function from your worker script :
 
 ```js
@@ -179,9 +179,9 @@ retrieve the list of exported function from your worker script :
 
 ### Polyfill Required for IE11
 
-Workerize-loader supports browsers that support Web Workers - that's IE10+.
+workerize-loader-wp5 supports browsers that support Web Workers - that's IE10+.
 However, these browsers require a polyfill in order to use Promises, which
-Workerize-loader relies on. It is recommended that the polyfill be installed
+workerize-loader-wp5 relies on. It is recommended that the polyfill be installed
 globally, since Webpack itself also needs Promises to load bundles.
 
 The smallest implementation is the one we recommend installing:
@@ -200,11 +200,11 @@ All worker code can now use Promises.
 
 ## Without Webpack
 
-To test a module that is normally imported via `workerize-loader` when not using
+To test a module that is normally imported via `workerize-loader-wp5` when not using
 Webpack, import the module directly in your test:
 
 ```diff
--const worker = require('workerize-loader!./worker.js');
+-const worker = require('workerize-loader-wp5!./worker.js');
 +const worker = () => require('./worker.js');
 
 const instance = worker();
@@ -213,7 +213,7 @@ const instance = worker();
 ## With Webpack and Jest
 
 In Jest, it's possible to define a custom `transform` that emulates
-workerize-loader on the main thread.
+workerize-loader-wp5 on the main thread.
 
 First, install `babel-jest` and `identity-object-proxy`:
 
@@ -228,10 +228,10 @@ sections of your Jest config (generally located in your `package.json`):
 {
   "jest": {
     "moduleNameMapper": {
-      "workerize-loader(\\?.*)?!(.*)": "identity-obj-proxy"
+      "workerize-loader-wp5(\\?.*)?!(.*)": "identity-obj-proxy"
     },
     "transform": {
-      "workerize-loader(\\?.*)?!(.*)": "<rootDir>/workerize-jest.js",
+      "workerize-loader-wp5(\\?.*)?!(.*)": "<rootDir>/workerize-jest.js",
       "^.+\\.[jt]sx?$": "babel-jest",
       "^.+\\.[jt]s?$": "babel-jest"
     }
@@ -259,7 +259,7 @@ module.exports = {
 };
 ```
 
-Now your tests and any modules they import can use `workerize-loader!` prefixes,
+Now your tests and any modules they import can use `workerize-loader-wp5!` prefixes,
 and the imports will be turned into async functions just like they are in
 Workerize.
 
@@ -272,4 +272,4 @@ read!
 ### License
 
 [MIT License](https://oss.ninja/mit/developit) ©
-[Jason Miller](https://jasonformat.com)
+[Rafael Contreras](https://contrer.as)
