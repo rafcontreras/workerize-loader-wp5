@@ -9,20 +9,28 @@
 
 ## Install
 
-```sh
+```bash
 npm install -D workerize-loader-wp5
 ```
 
+or
+
+```bash
+yarn add -D workerize-loader-wp5
+```
 ### Usage
 
 **worker.js**:
 
 ```js
 // block for `time` ms, then return the number of loops we could run in that time:
-export function expensive(time) {
-  let start = Date.now(),
-    count = 0;
-  while (Date.now() - start < time) count++;
+export const expensiveFunction = (time) => {
+  let start = Date.now();
+  let count = 0;
+  while (Date.now() - start < time) {
+    count++;
+  };
+
   return count;
 }
 ```
@@ -32,9 +40,9 @@ export function expensive(time) {
 ```js
 import worker from "workerize-loader-wp5!./worker";
 
-let instance = worker(); // `new` is optional
+const instance = worker(); // `new` is optional
 
-instance.expensive(1000).then(count => {
+instance.expensiveFunction(1000).then(count => {
   console.log(`Ran ${count} loops`);
 });
 ```
@@ -42,7 +50,7 @@ instance.expensive(1000).then(count => {
 ### Options
 
 Workerize options can either be defined in your Webpack configuration, or using
-Webpack's
+Webpack"s
 [syntax for inline loader options](https://webpack.js.org/concepts/loaders/#inline).
 
 #### `inline`
@@ -54,7 +62,7 @@ You can also inline the worker as a BLOB with the `inline` parameter
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader-wp5',
+  loader: "workerize-loader-wp5",
   options: { inline: true }
 }
 ```
@@ -75,8 +83,8 @@ will be injected automatically (`{name}.worker.js`).
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader-wp5',
-  options: { name: '[name].[contenthash:8]' }
+  loader: "workerize-loader-wp5",
+  options: { name: "[name].[contenthash:8]" }
 }
 ```
 
@@ -97,8 +105,8 @@ get their full URL. It can be a path, or a full URL with host.
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader-wp5',
-  options: { publicPath: '/static/' }
+  loader: "workerize-loader-wp5",
+  options: { publicPath: "/static/" }
 }
 ```
 
@@ -114,7 +122,7 @@ worker being loaded.
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader-wp5',
+  loader: "workerize-loader-wp5",
   options: { ready: true }
 }
 ```
@@ -134,7 +142,7 @@ Type: `Boolean` Default: `false`
 
 When enabled, generated output will create your Workers using a Data URL that
 loads your code via `importScripts` (eg:
-`new Worker('data:,importScripts("url")')`). This workaround enables
+`new Worker("data:,importScripts("url")")`). This workaround enables
 cross-origin script preloading, but Workers are created on an "opaque origin"
 and cannot access resources on the origin of their host page without CORS
 enabled. Only enable it if you understand this and specifically need the
@@ -143,7 +151,7 @@ workaround.
 ```js
 // webpack.config.js
 {
-  loader: 'workerize-loader-wp5',
+  loader: "workerize-loader-wp5",
   options: { import: true }
 }
 ```
@@ -156,8 +164,8 @@ import worker from "workerize-loader-wp5?import!./worker";
 
 ### About [Babel](https://babeljs.io/)
 
-If you're using [Babel](https://babeljs.io/) in your build, make sure you
-disabled commonJS transform. Otherwize, workerize-loader-wp5 won't be able to
+If you"re using [Babel](https://babeljs.io/) in your build, make sure you
+disabled commonJS transform. Otherwize, workerize-loader-wp5 won"t be able to
 retrieve the list of exported function from your worker script :
 
 ```js
@@ -179,7 +187,7 @@ retrieve the list of exported function from your worker script :
 
 ### Polyfill Required for IE11
 
-workerize-loader-wp5 supports browsers that support Web Workers - that's IE10+.
+workerize-loader-wp5 supports browsers that support Web Workers - that"s IE10+.
 However, these browsers require a polyfill in order to use Promises, which
 workerize-loader-wp5 relies on. It is recommended that the polyfill be installed
 globally, since Webpack itself also needs Promises to load bundles.
@@ -204,15 +212,15 @@ To test a module that is normally imported via `workerize-loader-wp5` when not u
 Webpack, import the module directly in your test:
 
 ```diff
--const worker = require('workerize-loader-wp5!./worker.js');
-+const worker = () => require('./worker.js');
+-const worker = require("workerize-loader-wp5!./worker.js");
++const worker = () => require("./worker.js");
 
 const instance = worker();
 ```
 
 ## With Webpack and Jest
 
-In Jest, it's possible to define a custom `transform` that emulates
+In Jest, it"s possible to define a custom `transform` that emulates
 workerize-loader-wp5 on the main thread.
 
 First, install `babel-jest` and `identity-object-proxy`:
@@ -240,7 +248,7 @@ sections of your Jest config (generally located in your `package.json`):
 ```
 
 Finally, create the custom Jest transformer referenced above as a file
-`workerize-jest.js` in your project's root directory (where the package.json
+`workerize-jest.js` in your project"s root directory (where the package.json
 is):
 
 ```js
@@ -266,7 +274,7 @@ Workerize.
 ### Credit
 
 The inner workings here are heavily inspired by
-[worker-loader](https://github.com/webpack-contrib/worker-loader). It's worth a
+[worker-loader](https://github.com/webpack-contrib/worker-loader). It"s worth a
 read!
 
 ### License
