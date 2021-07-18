@@ -1,3 +1,5 @@
+# Workerize Loader for WebPack 5
+
 > A webpack loader that moves a module and its dependencies into a Web Worker,
 > automatically reflecting exported functions as asynchronous proxies.
 
